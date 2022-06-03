@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from '@mui/system';
+import React, { useRef } from 'react';
+import Nav from './components/Nav';
+import Weather from './components/Weather';
 
-function App() {
+const App = () => {
+  const zipRef = useRef();
+
+  const getWeather = async (lat, lon) => {
+    try {
+      const weather = await fetch(
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid={f5636b705a5ab5ba228670eab9d9b8da}`
+      );
+      console.log(weather);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="md">
+      <Nav zipRef={zipRef} />
+      <Weather />
+    </Container>
   );
-}
+};
 
 export default App;
