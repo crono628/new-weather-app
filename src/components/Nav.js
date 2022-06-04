@@ -17,7 +17,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { TextField } from '@mui/material';
+import { Switch, TextField } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -119,10 +119,14 @@ export default function PersistentDrawerLeft({ onChange, onZipSubmit }) {
                 input: {
                   color: '#0d48a1',
                 },
+                mr: 2,
               }}
               size="small"
-              label="Zip Code"
+              label="Location"
             />
+            Name
+            <Switch sx={{ color: 'white' }} />
+            Zipcode
           </Box>
         </Toolbar>
       </AppBar>
