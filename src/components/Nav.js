@@ -86,7 +86,7 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-export default function PersistentDrawerLeft({ zipRef }) {
+export default function PersistentDrawerLeft({ onChange, onZipSubmit }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -112,16 +112,18 @@ export default function PersistentDrawerLeft({ zipRef }) {
           >
             <MenuIcon />
           </IconButton>
-          <CustomTextField
-            ref={zipRef}
-            sx={{
-              input: {
-                color: '#0d48a1',
-              },
-            }}
-            size="small"
-            label="Zip Code"
-          />
+          <Box component="form" onSubmit={onZipSubmit}>
+            <CustomTextField
+              onChange={onChange}
+              sx={{
+                input: {
+                  color: '#0d48a1',
+                },
+              }}
+              size="small"
+              label="Zip Code"
+            />
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
