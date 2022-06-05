@@ -19,12 +19,9 @@ const App = () => {
       if (geoResponse.ok) {
         let geoCode = await geoResponse.json();
         let { lat, lon, name, zip } = geoCode;
-
         let WEATHER_API = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,alerts&appid=53dcc962829731a4fa033950e8997254`;
-
         let weatherResponse = await fetch(WEATHER_API);
         let weatherCall = await weatherResponse.json();
-
         console.log(weatherCall);
         setWeather({
           name: name,
@@ -41,7 +38,7 @@ const App = () => {
     }
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1400);
   };
 
   const handleSubmit = (e) => {
@@ -58,7 +55,9 @@ const App = () => {
         town="fart"
       />
       {loading && <LoadingCircle />}
-      {loading === false && <CurrentWeather forecast={weather} />}
+      {loading === false && (
+        <CurrentWeather forecast={weather} loading={loading} />
+      )}
     </Container>
   );
 };
