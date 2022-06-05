@@ -86,7 +86,7 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-export default function PersistentDrawerLeft({ onChange, onZipSubmit }) {
+export default function Nav({ onChange, onZipSubmit }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -124,9 +124,9 @@ export default function PersistentDrawerLeft({ onChange, onZipSubmit }) {
               size="small"
               label="Location"
             />
-            Name
+            {/* Name
             <Switch sx={{ color: 'white' }} />
-            Zipcode
+            Zipcode */}
           </Box>
         </Toolbar>
       </AppBar>
