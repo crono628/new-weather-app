@@ -124,9 +124,6 @@ export default function Nav({ onChange, onZipSubmit }) {
               size="small"
               label="Location"
             />
-            {/* Name
-            <Switch sx={{ color: 'white' }} />
-            Zipcode */}
           </Box>
         </Toolbar>
       </AppBar>
