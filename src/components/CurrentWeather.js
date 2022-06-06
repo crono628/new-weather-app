@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Grow, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import IconSelector from './IconSelector';
+import { hourDisplay, minutesDisplay } from './helpers/helpers';
 
 const centerStyles = {
   display: 'flex',
@@ -12,7 +13,7 @@ const centerStyles = {
 const CurrentWeather = ({ forecast, loading }) => {
   const [date, setDate] = useState('');
   const [today, setToday] = useState({});
-  const { current, name } = forecast;
+  const { current, daily, name, timezoneOffset } = forecast;
 
   useEffect(() => {
     let todaysDate = new Date(current.dt * 1000);
@@ -24,8 +25,12 @@ const CurrentWeather = ({ forecast, loading }) => {
       }/${todaysDate.getDate()}/${todaysDate.getFullYear()}`
     );
     setToday({
-      sunrise: `${sunrise.getHours()}:${sunrise.getMinutes()}`,
-      sunset: `${sunset.getHours()}:${sunset.getMinutes()}`,
+      sunrise: `${hourDisplay(sunrise, timezoneOffset)}:${minutesDisplay(
+        sunrise
+      )}`,
+      sunset: `${hourDisplay(sunset, timezoneOffset)}:${minutesDisplay(
+        sunset
+      )}`,
     });
   }, [forecast]);
 
@@ -39,6 +44,10 @@ const CurrentWeather = ({ forecast, loading }) => {
               <Typography variant="h5">{name}</Typography>
               <Typography sx={{ ml: 3 }} variant="h2">
                 {Math.round(current.temp)}°
+              </Typography>
+              <Typography variant="body1">
+                High: {Math.round(daily[0].temp.max)}° Low:{' '}
+                {Math.round(daily[0].temp.min)}°
               </Typography>
               <Typography variant="h5">
                 {current.weather[0].description}

@@ -21,8 +21,8 @@ const DailyForecast = ({ forecast, loading }) => {
 
   return (
     <Grow easing="" in={!loading} timeout={1100}>
-      <Paper elevation={3} sx={{ backgroundColor: '#91cbf9', mt: 3 }}>
-        <Box sx={{ p: 3 }}>
+      <Paper elevation={3} sx={{ backgroundColor: '#91cbf9' }}>
+        <Box sx={{ px: 3, py: 1.5, my: 1 }}>
           <Card sx={centerStyles}>
             <CardContent>
               <Typography variant="body1">{date}</Typography>

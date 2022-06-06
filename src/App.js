@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Nav from './components/Nav';
 import CurrentWeather from './components/CurrentWeather';
 import { db } from './firebase';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import SelectLocation from './components/SelectLocation';
 import DailyForecast from './components/DailyForecast';
+import HourlyForecast from './components/HourlyForecast';
 
 const App = () => {
   const [weather, setWeather] = useState([]);
@@ -58,7 +59,7 @@ const App = () => {
           current: weatherCall.current,
           daily: [...weatherCall.daily],
           hourly: [...weatherCall.hourly],
-          timezoneOffset: weatherCall.timezone_offset,
+          timezoneOffset: (weatherCall.timezone_offset / 60 / 60) * -1,
         });
       }
       // }
@@ -111,14 +112,45 @@ const App = () => {
       {loading === false && (
         <CurrentWeather forecast={weather} loading={loading} />
       )}
-      {loading === false &&
-        weather.daily.map((day, index) => {
-          if (index == 0) {
-            return null;
-          } else {
-            return <DailyForecast forecast={day} loading={loading} />;
-          }
-        })}
+      {loading === false && (
+        <>
+          <Box sx={{ display: 'flex', overflowX: 'scroll', mt: 3 }}>
+            {weather.hourly.map((hour, index) => {
+              if (index === 0 || index > 24) {
+                return null;
+              }
+              return (
+                <HourlyForecast
+                  key={hour.dt}
+                  forecast={hour}
+                  offset={weather.timezoneOffset}
+                />
+              );
+            })}
+          </Box>
+          <Typography fontSize="0.7rem">
+            Scroll for hourly forecast →
+          </Typography>
+        </>
+      )}
+      {loading === false && (
+        <Box>
+          {weather.daily.map((day, index) => {
+            if (index == 0) {
+              return null;
+            } else {
+              return (
+                <DailyForecast
+                  key={day.dt}
+                  sx={{ mt: 3 }}
+                  forecast={day}
+                  loading={loading}
+                />
+              );
+            }
+          })}
+        </Box>
+      )}
       {/* <SelectLocation
         choice={choice}
         setChoice={(e, newChoice) => setChoice(newChoice)}
