@@ -8,9 +8,9 @@ import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
 import Brightness2OutlinedIcon from '@mui/icons-material/Brightness2Outlined';
 import { Box } from '@mui/material';
 
-const IconSelector = ({ code, night }) => {
+const IconSelector = ({ code, size, night }) => {
   const iconStyles = {
-    fontSize: '3rem',
+    fontSize: `${size}`,
   };
 
   function handleIcon(num) {

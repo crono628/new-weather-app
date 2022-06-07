@@ -24,6 +24,7 @@ const HourlyForecast = ({ forecast, loading, offset }) => {
           <Card sx={centerStyles}>
             <CardContent>
               <Typography variant="caption">{time}</Typography>
+              <IconSelector code={forecast.weather[0].id} size="1rem" />
               <Typography variant="body1">
                 {Math.round(forecast.temp)}°
               </Typography>

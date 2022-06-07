@@ -35,7 +35,7 @@ const DailyForecast = ({ forecast, loading }) => {
               </Typography>
             </CardContent>
             <CardContent>
-              <IconSelector code={forecast.weather[0].id} />
+              <IconSelector code={forecast.weather[0].id} size="3rem" />
             </CardContent>
           </Card>
         </Box>

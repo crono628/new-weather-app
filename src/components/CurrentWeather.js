@@ -52,7 +52,7 @@ const CurrentWeather = ({ forecast, loading }) => {
               <Typography variant="h5">
                 {current.weather[0].description}
               </Typography>
-              <IconSelector code={current.weather[0].id} />
+              <IconSelector code={current.weather[0].id} size="3rem" />
               <Typography variant="body1">Sunrise: {today.sunrise}</Typography>
               <Typography>Sunset: {today.sunset}</Typography>
             </CardContent>
