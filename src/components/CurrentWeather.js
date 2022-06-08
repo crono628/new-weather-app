@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Grow, Paper, Typography } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Fade,
+  Grow,
+  Paper,
+  Slide,
+  Typography,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import IconSelector from './IconSelector';
 import { hourDisplay, minutesDisplay } from './helpers/helpers';
@@ -35,7 +43,7 @@ const CurrentWeather = ({ forecast, loading }) => {
   }, [forecast]);
 
   return (
-    <Grow easing="" in={!loading} timeout={1100}>
+    <Fade in={!loading} unmountOnExit>
       <Paper elevation={3} sx={{ backgroundColor: '#91cbf9' }}>
         <Box sx={{ p: 3 }}>
           <Card sx={centerStyles}>
@@ -59,7 +67,7 @@ const CurrentWeather = ({ forecast, loading }) => {
           </Card>
         </Box>
       </Paper>
-    </Grow>
+    </Fade>
   );
 };
 

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Grow, Paper, Typography } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Fade,
+  Grow,
+  Paper,
+  Slide,
+  Typography,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import IconSelector from './IconSelector';
 import { hourDisplay, minutesDisplay } from './helpers/helpers';
@@ -18,7 +26,7 @@ const HourlyForecast = ({ forecast, loading, offset }) => {
   );
 
   return (
-    <Grow easing="" in={!loading} timeout={1100}>
+    <Fade in={!loading} unmountOnExit>
       <Paper elevation={3} sx={{ backgroundColor: '#91cbf9', mb: 1.5, mr: 1 }}>
         <Box sx={{ p: 1 }}>
           <Card sx={centerStyles}>
@@ -32,7 +40,7 @@ const HourlyForecast = ({ forecast, loading, offset }) => {
           </Card>
         </Box>
       </Paper>
-    </Grow>
+    </Fade>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -11,13 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Switch, TextField } from '@mui/material';
+import { Menu, MenuItem, TextField } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -86,9 +80,16 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-export default function Nav({ onChange, onZipSubmit }) {
+export default function Nav({
+  onChange,
+  onZipSubmit,
+  locations,
+  anchorEl,
+  onMenuClose,
+}) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const menu = Boolean(anchorEl);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -123,7 +124,25 @@ export default function Nav({ onChange, onZipSubmit }) {
               }}
               size="small"
               label="Location"
+              id="basic-search"
             />
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={menu}
+              onClose={onMenuClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-search',
+              }}
+            >
+              {locations.map((loc, index) => (
+                <MenuItem
+                  value={index}
+                  key={loc.state}
+                  onClick={onMenuClose}
+                >{`${loc.name}, ${loc.state}`}</MenuItem>
+              ))}
+            </Menu>
           </Box>
         </Toolbar>
       </AppBar>

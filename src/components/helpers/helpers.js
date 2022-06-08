@@ -1,3 +1,5 @@
+import { Box, CircularProgress } from '@mui/material';
+
 function minutesDisplay(date) {
   let minutes = date.getMinutes().toString();
   if (minutes.length == 1) {
@@ -15,4 +17,12 @@ function hourDisplay(date, offset) {
   return hours;
 }
 
-export { minutesDisplay, hourDisplay };
+function LoadingCircle() {
+  return (
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <CircularProgress />
+    </Box>
+  );
+}
+
+export { minutesDisplay, hourDisplay, LoadingCircle };
