@@ -10,7 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Menu, MenuItem, TextField } from '@mui/material';
+import { Card, Menu, MenuItem, TextField, Typography } from '@mui/material';
+import { Container } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -122,7 +123,7 @@ export default function Nav({
                 mr: 2,
               }}
               size="small"
-              label="Location"
+              label="Zipcode/City"
               id="basic-search"
             />
             <Menu
@@ -168,7 +169,13 @@ export default function Nav({
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Box sx={{ backgroundColor: 'aliceblue', height: '100%' }}></Box>
+        <Box sx={{ backgroundColor: 'aliceblue', height: '100%' }}>
+          <Container>
+            <Card sx={{ padding: 3, margin: 2 }}>
+              <Typography>Coming Soon: Favorite Locations</Typography>
+            </Card>
+          </Container>
+        </Box>
         <Divider />
       </Drawer>
       <Main open={open}>
