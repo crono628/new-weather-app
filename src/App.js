@@ -2,7 +2,7 @@ import { Box, Container } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import Nav from './components/Nav';
 import CurrentWeather from './components/CurrentWeather';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import DailyForecast from './components/DailyForecast';
 import HourlyForecast from './components/HourlyForecast';
 import {
@@ -21,7 +21,7 @@ const App = () => {
   const [choice, setChoice] = useState('');
 
   useEffect(() => {
-    if (menu) {
+    if (menu && choice) {
       getWeather(choice.lat, choice.lon).then((data) => {
         setWeather({
           name: choice.name,
@@ -36,6 +36,13 @@ const App = () => {
     console.log('render', weather);
   }, [choice]);
 
+  function reset() {
+    setWeather([]);
+    setLocations([]);
+    setMenu(false);
+    setChoice('');
+  }
+
   const handleSubmit = (e) => {
     setLoading(true);
     let locState;
@@ -43,7 +50,8 @@ const App = () => {
     let node = e.currentTarget;
     e.preventDefault();
     geoLocation(search)
-      .then((data) => {
+      .then(async (data) => {
+        // console.log(data);
         if (data.length > 1) {
           setLocations(data);
           setAnchorEl(node);
@@ -54,19 +62,7 @@ const App = () => {
         } else if (isNaN(search)) {
           locState = data[0].state;
           locName = data[0].name;
-          return getWeather(data[0].lat, data[0].lon);
-        } else {
-          geoLocation(data.name)
-            .then((item) => {
-              locState = item[0].state;
-              locName = item[0].name;
-            })
-            .catch((err) => console.log(err));
-          return getWeather(data.lat, data.lon);
-        }
-      })
-      .then((item) => {
-        if (menu === false) {
+          const item = await getWeather(data[0].lat, data[0].lon);
           setWeather({
             name: locName,
             state: locState,
@@ -75,6 +71,23 @@ const App = () => {
             hourly: [...item.hourly],
             timezoneOffset: (item.timezone_offset / 60 / 60) * -1,
           });
+        } else {
+          geoLocation(data.name)
+            .then(async (item) => {
+              locState = item[0].state;
+              locName = item[0].name;
+              const zipItem = await getWeather(data.lat, data.lon);
+              console.log(zipItem);
+              setWeather({
+                name: locName,
+                state: locState,
+                current: zipItem.current,
+                daily: [...zipItem.daily],
+                hourly: [...zipItem.hourly],
+                timezoneOffset: (zipItem.timezone_offset / 60 / 60) * -1,
+              });
+            })
+            .catch((err) => console.log(err));
         }
       })
       .catch((err) => console.log(err));
@@ -85,10 +98,7 @@ const App = () => {
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-    setWeather([]);
-    setLocations([]);
-    setMenu(false);
-    setChoice('');
+    reset();
   };
 
   return (
@@ -101,6 +111,7 @@ const App = () => {
         onMenuClose={(e) => {
           setAnchorEl(null);
           setChoice(locations[e.target.value]);
+          console.log(locations[e.target.value]);
         }}
       />
       {weather.length === 0 ? null : (

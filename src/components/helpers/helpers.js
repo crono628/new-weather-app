@@ -2,7 +2,7 @@ import { Box, CircularProgress } from '@mui/material';
 
 function minutesDisplay(date) {
   let minutes = date.getMinutes().toString();
-  if (minutes.length == 1) {
+  if (minutes.length === 1) {
     return '0' + minutes;
   }
   return minutes;

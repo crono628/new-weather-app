@@ -12,6 +12,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Card, Menu, MenuItem, TextField, Typography } from '@mui/material';
 import { Container } from '@mui/system';
+import uniqid from 'uniqid';
 
 const drawerWidth = 240;
 
@@ -138,7 +139,7 @@ export default function Nav({
               {locations.map((loc, index) => (
                 <MenuItem
                   value={index}
-                  key={loc.state}
+                  key={uniqid()}
                   onClick={onMenuClose}
                 >{`${loc.name}, ${loc.state}`}</MenuItem>
               ))}
