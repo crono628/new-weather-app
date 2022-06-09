@@ -28,7 +28,7 @@ function LoadingCircle() {
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 async function geoLocation(search) {
-  const GEOCODE_NAME = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`;
+  const GEOCODE_NAME = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`;
   const GEOCODE_ZIPCODE = `https://api.openweathermap.org/geo/1.0/zip?zip=${search}&appid=${API_KEY}`;
   let geoResponse;
   isNaN(search)
