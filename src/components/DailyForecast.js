@@ -28,7 +28,7 @@ const DailyForecast = ({ forecast, loading }) => {
   }, []);
 
   return (
-    <Fade in={!loading} unmountOnExit>
+    <Fade in={!loading} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
       <Paper elevation={3} sx={{ backgroundColor: '#91cbf9' }}>
         <Box sx={{ px: 3, py: 1.5, my: 1 }}>
           <Card sx={centerStyles}>

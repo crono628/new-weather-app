@@ -26,7 +26,7 @@ const HourlyForecast = ({ forecast, loading, offset }) => {
   );
 
   return (
-    <Fade in={!loading} unmountOnExit>
+    <Fade in={!loading} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
       <Paper elevation={3} sx={{ backgroundColor: '#91cbf9', mb: 1.5, mr: 1 }}>
         <Box sx={{ p: 1 }}>
           <Card sx={centerStyles}>

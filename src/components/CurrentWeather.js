@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Card,
-  CardContent,
-  Fade,
-  Grow,
-  Paper,
-  Slide,
-  Typography,
-} from '@mui/material';
+import { Card, CardContent, Fade, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import IconSelector from './IconSelector';
 import { hourDisplay, minutesDisplay } from './helpers/helpers';
@@ -21,7 +13,7 @@ const centerStyles = {
 const CurrentWeather = ({ forecast, loading }) => {
   const [date, setDate] = useState('');
   const [today, setToday] = useState({});
-  const { current, daily, name, timezoneOffset } = forecast;
+  const { current, daily, name, state, timezoneOffset } = forecast;
 
   useEffect(() => {
     let todaysDate = new Date(current.dt * 1000);
@@ -43,13 +35,13 @@ const CurrentWeather = ({ forecast, loading }) => {
   }, [forecast]);
 
   return (
-    <Fade in={!loading} unmountOnExit>
+    <Fade in={!loading} unmountOnExit timeout={{ enter: 1000, exit: 1000 }}>
       <Paper elevation={3} sx={{ backgroundColor: '#91cbf9' }}>
         <Box sx={{ p: 3 }}>
           <Card sx={centerStyles}>
             <CardContent>
               <Typography variant="body1">{date}</Typography>
-              <Typography variant="h5">{name}</Typography>
+              <Typography variant="h6">{`${name}, ${state}`}</Typography>
               <Typography sx={{ ml: 3 }} variant="h2">
                 {Math.round(current.temp)}°
               </Typography>
