@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Card,
-  CardContent,
-  Fade,
-  Grow,
-  Paper,
-  Slide,
-  Typography,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardContent, Fade, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import IconSelector from './IconSelector';
 import { hourDisplay, minutesDisplay } from './helpers/helpers';
@@ -19,7 +11,7 @@ const centerStyles = {
 };
 
 const HourlyForecast = ({ forecast, loading, offset }) => {
-  const [time, setTime] = useState(
+  const [time] = useState(
     `${hourDisplay(new Date(forecast.dt * 1000), offset)}:${minutesDisplay(
       new Date(forecast.dt * 1000)
     )}`

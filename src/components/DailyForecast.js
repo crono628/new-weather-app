@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Card,
-  CardContent,
-  Fade,
-  Grow,
-  Paper,
-  Slide,
-  Typography,
-} from '@mui/material';
+import { Card, CardContent, Fade, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import IconSelector from './IconSelector';
 

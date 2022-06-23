@@ -22,9 +22,9 @@ const IconSelector = ({ code, size, night }) => {
       return <AcUnitOutlinedIcon sx={iconStyles} />;
     } else if (num < 800) {
       return <WaterOutlinedIcon sx={iconStyles} />;
-    } else if (num == 800 && night) {
+    } else if (num === 800 && night) {
       return <Brightness2OutlinedIcon sx={iconStyles} />;
-    } else if (num == 800) {
+    } else if (num === 800) {
       return <WbSunnyOutlinedIcon sx={iconStyles} />;
     } else {
       return <CloudOutlinedIcon sx={iconStyles} />;

@@ -33,7 +33,6 @@ const App = () => {
         });
       });
     }
-    console.log('render', weather);
   }, [choice]);
 
   function reset() {
@@ -74,13 +73,16 @@ const App = () => {
         } else {
           geoLocation(data.name)
             .then(async (item) => {
-              locState = item[0].state;
+              locState = item.find(
+                (loc) =>
+                  Math.round(loc.lat) === Math.round(data.lat) &&
+                  Math.round(loc.lon) === Math.round(data.lon)
+              );
               locName = item[0].name;
               const zipItem = await getWeather(data.lat, data.lon);
-              console.log(zipItem);
               setWeather({
                 name: locName,
-                state: locState,
+                state: locState.state,
                 current: zipItem.current,
                 daily: [...zipItem.daily],
                 hourly: [...zipItem.hourly],
