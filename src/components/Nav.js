@@ -126,6 +126,7 @@ export default function Nav({
               size="small"
               label="Zipcode/City"
               id="basic-search"
+              data-testid="zipcode-input"
             />
             <Menu
               id="basic-menu"
@@ -136,13 +137,15 @@ export default function Nav({
                 'aria-labelledby': 'basic-search',
               }}
             >
-              {locations.map((loc, index) => (
-                <MenuItem
-                  value={index}
-                  key={uniqid()}
-                  onClick={onMenuClose}
-                >{`${loc.name}, ${loc.state}`}</MenuItem>
-              ))}
+              {locations
+                ? locations.map((loc, index) => (
+                    <MenuItem
+                      value={index}
+                      key={uniqid()}
+                      onClick={onMenuClose}
+                    >{`${loc.name}, ${loc.state}`}</MenuItem>
+                  ))
+                : null}
             </Menu>
           </Box>
         </Toolbar>
